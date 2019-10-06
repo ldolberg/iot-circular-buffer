@@ -4,7 +4,8 @@ obj = $(src:.c=.o)
 LDFLAGS = -lm -Wall
 
 main: $(obj)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	mkdir -p bin
+	$(CC) -o bin/$@ $^ $(LDFLAGS)
 	rm -f $(obj)
 
 .PHONY: clean
