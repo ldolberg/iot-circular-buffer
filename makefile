@@ -1,26 +1,11 @@
-# Usage:
-# make        # compile all binary
-# make clean  # remove ALL binaries and objects
+src = $(wildcard *.c)
+obj = $(src:.c=.o)
 
-.PHONY = all clean
+LDFLAGS = -lGL -lglut -lpng -lz -lm
 
-CC = gcc                        # compiler to use
+myprog: $(obj)
+    $(CC) -o $@ $^ $(LDFLAGS)
 
-LINKERFLAG = -lm
-
-SRCS := $(wildcard *.c)
-BINS := $(SRCS:%.c=%)
-
-all: ${BINS}
-
-%: %.o
-        @echo "Checking.."
-        ${CC} ${LINKERFLAG} $< -o $@
-
-%.o: %.c
-        @echo "Creating object.."
-        ${CC} -c $<
-
+.PHONY: clean
 clean:
-        @echo "Cleaning up..."
-        rm -rvf *.o ${BINS}
+    rm -f $(obj) myprogs
