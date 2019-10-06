@@ -1,11 +1,12 @@
 src = $(wildcard *.c)
 obj = $(src:.c=.o)
 
-LDFLAGS = -lGL -lglut -lpng -lz -lm
+LDFLAGS = -lm -Wall
 
-myprog: $(obj)
-    $(CC) -o $@ $^ $(LDFLAGS)
+main: $(obj)
+	$(CC) -o $@ $^ $(LDFLAGS)
+	rm -f $(obj)
 
 .PHONY: clean
 clean:
-    rm -f $(obj) myprogs
+	rm -f $(obj) main
