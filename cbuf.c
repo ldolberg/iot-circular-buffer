@@ -5,13 +5,14 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "cbuf.h"
+#define MAX_SIZE 49
 
 void init(Queue *q, size_t size){
   q->buffer = malloc(sizeof(uint8_t) * size);  
 }
 
 void add_elem(Queue *cbuf, uint8_t data){
-  if (cbuf->head == 49){
+  if (cbuf->head == MAX_SIZE){
     cbuf->head = 0;
   }
 
@@ -25,7 +26,7 @@ void add_elem(Queue *cbuf, uint8_t data){
 
 size_t read(Queue *cbuf){
   size_t res = cbuf->buffer[cbuf->tail];
-  if (cbuf->tail == 49){
+  if (cbuf->tail == MAX_SIZE){
     cbuf->tail = 0;
   }else{
     cbuf->tail +=1;
